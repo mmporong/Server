@@ -1,0 +1,16 @@
+C:\Users\LIMMM\source\repos\Server\ServerCore\bin\Debug\net5.0\ServerCore.exe
+C:\Users\LIMMM\source\repos\Server\ServerCore\bin\Debug\net5.0\ServerCore.deps.json
+C:\Users\LIMMM\source\repos\Server\ServerCore\bin\Debug\net5.0\ServerCore.runtimeconfig.json
+C:\Users\LIMMM\source\repos\Server\ServerCore\bin\Debug\net5.0\ServerCore.runtimeconfig.dev.json
+C:\Users\LIMMM\source\repos\Server\ServerCore\bin\Debug\net5.0\ServerCore.dll
+C:\Users\LIMMM\source\repos\Server\ServerCore\bin\Debug\net5.0\ref\ServerCore.dll
+C:\Users\LIMMM\source\repos\Server\ServerCore\bin\Debug\net5.0\ServerCore.pdb
+C:\Users\LIMMM\source\repos\Server\ServerCore\obj\Debug\net5.0\ServerCore.csprojAssemblyReference.cache
+C:\Users\LIMMM\source\repos\Server\ServerCore\obj\Debug\net5.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LIMMM\source\repos\Server\ServerCore\obj\Debug\net5.0\ServerCore.AssemblyInfoInputs.cache
+C:\Users\LIMMM\source\repos\Server\ServerCore\obj\Debug\net5.0\ServerCore.AssemblyInfo.cs
+C:\Users\LIMMM\source\repos\Server\ServerCore\obj\Debug\net5.0\ServerCore.csproj.CoreCompileInputs.cache
+C:\Users\LIMMM\source\repos\Server\ServerCore\obj\Debug\net5.0\ServerCore.dll
+C:\Users\LIMMM\source\repos\Server\ServerCore\obj\Debug\net5.0\ref\ServerCore.dll
+C:\Users\LIMMM\source\repos\Server\ServerCore\obj\Debug\net5.0\ServerCore.pdb
+C:\Users\LIMMM\source\repos\Server\ServerCore\obj\Debug\net5.0\ServerCore.genruntimeconfig.cache
