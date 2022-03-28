@@ -4,21 +4,74 @@ using System.Threading.Tasks;
 
 namespace ServerCore
 {
-    // 메모리 배리어
-    // 코드 재배치 억제
-    // 가시성
+    class FastLock
+    {
+        public int id;
+    }
+
+    class SessionManager
+    {
+        FastLock I;
+        static object _lock = new object();
+
+        public static void TestSession()
+        {
+            lock (_lock)
+            {
+
+            }
+        }
+
+        public static void Test()
+        {
+            lock (_lock)
+            {
+                UserManager.TestUser();
+            }
+        }
+    }
+
+    class UserManager
+    {
+        FastLock I;
+        static object _lock = new object();
+
+        public static void Test()
+        {
+            lock (_lock)
+            {
+                SessionManager.TestSession();
+            }
+        }
+
+        public static void TestUser()
+        {
+            lock (_lock)
+            {
+
+            }
+        }
+    }
+
     class Program
     {
         static int number = 0;
-
         static void Thread_1()
         {
-            Interlocked.Increment(ref number);
+            for (int i = 0; i < 10000; i++)
+            {
+                SessionManager.Test();
+            }
         }
+
+        // 데드락 DeadLock
 
         static void Thread_2()
         {
-            Interlocked.Decrement(ref number);
+            for (int i = 0; i < 10000; i++)
+            {
+                UserManager.Test();
+            }
         }
 
         static void Main(string[] args)
