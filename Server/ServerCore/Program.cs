@@ -4,71 +4,58 @@ using System.Threading.Tasks;
 
 namespace ServerCore
 {
-    class SpinLock
-    {
-        volatile int _locked = 0;
-
-        public void Acquire()
-        {
-            while (true)
-            {
-                // 잠김이 풀리기를 기다린다
-
-                //int original = Interlocked.Exchange(ref _locked, 1);
-                //if (original == 0)
-                //    break;
-
-                // CAS Compare-And-Swap
-                int expected = 0;
-                int desired = 1;
-                if (Interlocked.CompareExchange(ref _locked, desired, expected) == expected)
-                    break;
-            }
-
-        }
-
-        public void Release()
-        {
-            _locked = 0;
-        }
-    }
-
     class Program
     {
-        static int _num = 0;
-        static SpinLock _lock = new SpinLock();
+        static object _lock = new object();
+        static SpinLock _lock2 = new SpinLock();
+        static Mutex _lock3 = new Mutex();
 
-        static void Thread_1()
+        class Reward
         {
-            for (int i = 0; i < 100000; i++)
-            {
-                _lock.Acquire();
-                _num++;
-                _lock.Release();
-            }
+
         }
 
-        static void Thread_2()
+        static ReaderWriterLockSlim _lock4 = new ReaderWriterLockSlim();
+
+        static Reward GetRewardById(int id)
         {
-            for (int i = 0; i < 100000; i++)
+            _lock4.EnterReadLock();
+            _lock4.ExitReadLock();
+
+            lock (_lock)
             {
-                _lock.Acquire();
-                _num--;
-                _lock.Release();
+
             }
+            return null; 
+        }
+
+        static void AddReward(Reward reward)
+        {
+            _lock4.EnterWriteLock();
+            _lock4.ExitWriteLock();
         }
 
         static void Main(string[] args)
         {
-            Task t1 = new Task(Thread_1);
-            Task t2 = new Task(Thread_2);
-            t1.Start();
-            t2.Start();
+            lock (_lock)
+            {
 
-            Task.WaitAll(t1, t2);
+            }
 
-            Console.WriteLine(_num);
+            bool lockTaken = false;
+            try
+            {
+                _lock2.Enter(ref lockTaken);
+
+            }
+            finally
+            {
+                if (lockTaken)
+                    _lock2.Exit();
+
+            }
         }
     }
 }
+
 
