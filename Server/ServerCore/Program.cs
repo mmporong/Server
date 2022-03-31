@@ -6,54 +6,25 @@ namespace ServerCore
 {
     class Program
     {
-        static object _lock = new object();
-        static SpinLock _lock2 = new SpinLock();
-        static Mutex _lock3 = new Mutex();
+        static ThreadLocal<string> ThreadName = new ThreadLocal<string>(() => { return  $"My Name is {Thread.CurrentThread.ManagedThreadId}"; });
 
-        class Reward
+
+        static void WhoAmI()
         {
-
-        }
-
-        static ReaderWriterLockSlim _lock4 = new ReaderWriterLockSlim();
-
-        static Reward GetRewardById(int id)
-        {
-            _lock4.EnterReadLock();
-            _lock4.ExitReadLock();
-
-            lock (_lock)
-            {
-
-            }
-            return null; 
-        }
-
-        static void AddReward(Reward reward)
-        {
-            _lock4.EnterWriteLock();
-            _lock4.ExitWriteLock();
+            bool repeat = ThreadName.IsValueCreated;
+            if (repeat)
+                Console.WriteLine(ThreadName.Value + " (repeat)");
+            else
+                Console.WriteLine(ThreadName.Value);
         }
 
         static void Main(string[] args)
         {
-            lock (_lock)
-            {
+            ThreadPool.SetMinThreads(1, 1);
+            ThreadPool.SetMaxThreads(3, 3);
+            Parallel.Invoke(WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI);
 
-            }
-
-            bool lockTaken = false;
-            try
-            {
-                _lock2.Enter(ref lockTaken);
-
-            }
-            finally
-            {
-                if (lockTaken)
-                    _lock2.Exit();
-
-            }
+            ThreadName.Dispose();
         }
     }
 }
